@@ -3,18 +3,66 @@
     <head>
         <meta charset="UTF-8">
         <title>Vue.js</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
-        <div id="v-container">
+        <div id="v-container" class="container">
+            <div class="v-header"></div>
 
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="v-content">
+                        <div class="course" v-for="course in courses">
+
+                            <div class="course__image">
+                                <img :src="course.image" :alt="course.title" class="img-responsive">
+                            </div>
+
+                            <div class="course__information">
+                                <h2 class="course__title">{{ course.title }}</h2>
+                                <div class="course__description" v-html="course.description"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="v-footer"></div>
         </div>
         <script src="https://unpkg.com/vue@2.3.3"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
-			(function( Vue ) {
+			(function( Vue, axios ) {
 				new Vue( {
-					el: '#v-container'
+					el: '#v-container',
+					data: {
+						courses: [],
+						events: []
+					},
+					mounted: function() {
+						var serverURL = window.location.href + '/data/api/';
+						var coursesURL = 'courses.json';
+						var eventsURL = 'events.json';
+						var _this = this;
+
+						// Obtener la lista de cursos por AJAX
+						axios.get( serverURL + coursesURL ).then( function( response ) {
+							console.log( response );
+							_this.courses = response.data;
+						} );
+
+						// Obtener la lista de eventos por AJAX
+						axios.get( serverURL + eventsURL ).then( function( response ) {
+							console.log( response );
+							_this.events = response.data;
+						} );
+
+					}
 				} );
-			})( window.Vue );
+			})( window.Vue, window.axios );
 
         </script>
     </body>

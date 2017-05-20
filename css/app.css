@@ -1,0 +1,16 @@
+.course {
+    position: relative;
+    border-bottom: 1px solid orange;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+}
+
+.course__image {
+    display: inline-block;
+    max-width: 50px;
+    float: left;
+}
+
+.course__information {
+    margin-left: 60px;
+}
