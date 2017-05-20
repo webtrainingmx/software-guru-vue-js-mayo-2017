@@ -13,6 +13,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="v-content">
+                        <h1 class="main-title">Cursos Próximos</h1>
                         <div class="course" v-for="course in courses">
 
                             <div class="course__image">
@@ -22,6 +23,16 @@
                             <div class="course__information">
                                 <h2 class="course__title">{{ course.title }}</h2>
                                 <div class="course__description" v-html="course.description"></div>
+                                <div class="course__start">
+                                    <strong>Fecha de inicio: </strong>
+                                    <span>
+                                        {{ course.startDateAndTime | formatDate('DD MMM YYYY') }}
+                                    </span>
+                                </div>
+                                <div class="course__end">
+                                    <strong>Fecha de fin: </strong>
+                                    <span>{{ course.endDateAndTime | formatDate('DD MMM YYYY') }}</span>
+                                </div>
                             </div>
 
                         </div>
@@ -34,13 +45,19 @@
         </div>
         <script src="https://unpkg.com/vue@2.3.3"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script>
-			(function( Vue, axios ) {
+			(function( Vue, axios, moment ) {
 				new Vue( {
 					el: '#v-container',
 					data: {
 						courses: [],
 						events: []
+					},
+					filters: {
+						formatDate: function( date, outputFormat ) {
+							return moment( date ).format( outputFormat );
+						}
 					},
 					mounted: function() {
 						var serverURL = window.location.href + '/data/api/';
@@ -62,7 +79,7 @@
 
 					}
 				} );
-			})( window.Vue, window.axios );
+			})( window.Vue, window.axios, window.moment );
 
         </script>
     </body>

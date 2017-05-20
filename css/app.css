@@ -1,8 +1,21 @@
+.main-title {
+    margin-bottom: 20px;
+}
+
 .course {
     position: relative;
+    border-top: 4px solid #f6a623;
     border-bottom: 1px solid orange;
-    padding-bottom: 10px;
-    margin-bottom: 40px;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.course__title {
+    font-size: 22px;
+    margin: 0 0 10px 0;
 }
 
 .course__image {
